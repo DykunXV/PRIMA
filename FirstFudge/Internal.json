@@ -1,25 +1,25 @@
 {
-  "MeshCube|2022-03-15T16:24:02.820Z|29418": {
+  "MeshCube|2022-03-15T16:28:14.430Z|57616": {
     "ƒ.MeshCube": {
-      "idResource": "MeshCube|2022-03-15T16:24:02.820Z|29418",
-      "name": "MeshCube",
+      "idResource": "MeshCube|2022-03-15T16:28:14.430Z|57616",
+      "name": "MyFirstCube",
       "type": "MeshCube"
     }
   },
-  "Material|2022-03-15T16:24:04.945Z|61375": {
+  "Material|2022-03-15T16:29:15.267Z|38312": {
     "ƒ.Material": {
-      "name": "ShaderFlat",
-      "idResource": "Material|2022-03-15T16:24:04.945Z|61375",
-      "shader": "ShaderFlat",
+      "name": "ShaderLit",
+      "idResource": "Material|2022-03-15T16:29:15.267Z|38312",
+      "shader": "ShaderLit",
       "coat": {
         "ƒ.CoatColored": {
-          "color": "[1, 0, 0, 1]",
+          "color": "[0.9607843137254902, 0, 0, 1]",
           "shininess": 0
         }
       }
     }
   },
-  "Graph|2022-03-15T16:24:09.486Z|96533": {
+  "Graph|2022-03-15T16:29:25.873Z|06239": {
     "ƒ.Graph": {
       "name": "NewGraph",
       "active": true,
@@ -27,7 +27,7 @@
         "ComponentMesh": [
           {
             "ƒ.ComponentMesh": {
-              "idMesh": "MeshCube|2022-03-15T16:24:02.820Z|29418",
+              "idMesh": "MeshCube|2022-03-15T16:28:14.430Z|57616",
               "pivot": {
                 "translation": "[0, 0, 0]",
                 "rotation": "[0, 0, 0]",
@@ -53,13 +53,13 @@
               "Component": {
                 "active": true
               },
-              "idMaterial": "Material|2022-03-15T16:24:04.945Z|61375"
+              "idMaterial": "Material|2022-03-15T16:29:15.267Z|38312"
             }
           }
         ]
       },
       "children": [],
-      "idResource": "Graph|2022-03-15T16:24:09.486Z|96533",
+      "idResource": "Graph|2022-03-15T16:29:25.873Z|06239",
       "type": "Graph"
     }
   }
