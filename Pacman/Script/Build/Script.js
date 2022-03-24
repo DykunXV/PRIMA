@@ -50,12 +50,14 @@ var Script;
     let pacmanCurrentY = 1;
     let WalkingDirections;
     (function (WalkingDirections) {
+        WalkingDirections["None"] = "NONE";
         WalkingDirections["Up"] = "UP";
         WalkingDirections["Down"] = "DOWN";
         WalkingDirections["Left"] = "LEFT";
         WalkingDirections["Right"] = "RIGHT";
     })(WalkingDirections || (WalkingDirections = {}));
     let currentWalkingDirection = 'NONE';
+    let newWalkingDirection = 'NONE';
     document.addEventListener('interactiveViewportStarted', start);
     function start(_event) {
         viewport = _event.detail;
@@ -64,10 +66,10 @@ var Script;
         ƒ.Loop.addEventListener("loopFrame" /* LOOP_FRAME */, update);
         ƒ.Loop.start(); // start the game loop to continously draw the viewport, update the audiosystem and drive the physics i/a
     }
-    function isNextTileWall() {
+    function isNextTileWall(walkingDirection) {
         let graph = viewport.getBranch();
         grid = graph.getChildrenByName('Grid')[0];
-        switch (currentWalkingDirection) {
+        switch (walkingDirection) {
             case 'LEFT':
                 nextRow = grid.getChildren()[pacmanCurrentY];
                 nextRowTile = nextRow.getChildren()[pacmanCurrentX - 1];
@@ -108,61 +110,67 @@ var Script;
                 return false;
         }
     }
+    function setNewWalkingDirection() {
+        if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.ARROW_LEFT, ƒ.KEYBOARD_CODE.A])) {
+            newWalkingDirection = WalkingDirections.Left;
+        }
+        if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.ARROW_RIGHT, ƒ.KEYBOARD_CODE.D])) {
+            newWalkingDirection = WalkingDirections.Right;
+        }
+        if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.ARROW_UP, ƒ.KEYBOARD_CODE.W])) {
+            newWalkingDirection = WalkingDirections.Up;
+        }
+        if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.ARROW_DOWN, ƒ.KEYBOARD_CODE.S])) {
+            newWalkingDirection = WalkingDirections.Down;
+        }
+    }
     function update(_event) {
         // ƒ.Physics.simulate();  // if physics is included and used
-        if (ƒ.Keyboard.isPressedOne([
-            ƒ.KEYBOARD_CODE.ARROW_RIGHT,
-            ƒ.KEYBOARD_CODE.D,
-        ]) &&
-            pacman.mtxLocal.translation.y % 1 < 0.05) {
+        setNewWalkingDirection();
+        console.log(pacman.mtxLocal.translation.y);
+        if (newWalkingDirection == 'RIGHT' &&
+            pacman.mtxLocal.translation.y % 1 < 0.05 &&
+            isNextTileWall(newWalkingDirection) == false) {
             currentWalkingDirection = WalkingDirections.Right;
             speed = new ƒ.Vector3(1 / 60, 0, 0);
         }
-        if (ƒ.Keyboard.isPressedOne([
-            ƒ.KEYBOARD_CODE.ARROW_LEFT,
-            ƒ.KEYBOARD_CODE.A,
-        ]) &&
-            pacman.mtxLocal.translation.y % 1 < 0.05) {
+        if (newWalkingDirection == 'LEFT' &&
+            pacman.mtxLocal.translation.y % 1 < 0.05 &&
+            isNextTileWall(newWalkingDirection) == false) {
             currentWalkingDirection = WalkingDirections.Left;
             speed = new ƒ.Vector3(-1 / 60, 0, 0);
         }
-        if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.ARROW_UP, ƒ.KEYBOARD_CODE.W]) &&
-            pacman.mtxLocal.translation.x % 1 < 0.05) {
+        if (newWalkingDirection == 'UP' &&
+            pacman.mtxLocal.translation.x % 1 < 0.05 &&
+            isNextTileWall(newWalkingDirection) == false) {
             currentWalkingDirection = WalkingDirections.Up;
             speed = new ƒ.Vector3(0, 1 / 60, 0);
         }
-        if (ƒ.Keyboard.isPressedOne([
-            ƒ.KEYBOARD_CODE.ARROW_DOWN,
-            ƒ.KEYBOARD_CODE.S,
-        ]) &&
-            pacman.mtxLocal.translation.x % 1 < 0.05) {
+        if (newWalkingDirection == 'DOWN' &&
+            pacman.mtxLocal.translation.x % 1 < 0.05 &&
+            isNextTileWall(newWalkingDirection) == false) {
             currentWalkingDirection = WalkingDirections.Down;
             speed = new ƒ.Vector3(0, -1 / 60, 0);
         }
-        if (pacman.mtxLocal.translation.y >= pacmanCurrentY + 0.95) {
+        if (pacman.mtxLocal.translation.y >= pacmanCurrentY + 1) {
             pacmanCurrentY += 1;
-            console.log(pacmanCurrentY);
-            isNextTileWall();
+            console.log('Y: ' + pacmanCurrentY);
         }
-        if (pacman.mtxLocal.translation.y <= pacmanCurrentY - 0.95) {
+        if (pacman.mtxLocal.translation.y <= pacmanCurrentY - 1) {
             pacmanCurrentY -= 1;
-            console.log(pacmanCurrentY);
-            isNextTileWall();
+            console.log('Y: ' + pacmanCurrentY);
         }
-        if (pacman.mtxLocal.translation.x >= pacmanCurrentX + 0.95) {
+        if (pacman.mtxLocal.translation.x >= pacmanCurrentX + 1) {
             pacmanCurrentX += 1;
-            console.log(pacmanCurrentX);
-            isNextTileWall();
+            console.log('X: ' + pacmanCurrentX);
         }
-        if (pacman.mtxLocal.translation.x <= pacmanCurrentX - 0.95) {
+        if (pacman.mtxLocal.translation.x <= pacmanCurrentX - 1) {
             pacmanCurrentX -= 1;
-            console.log(pacmanCurrentX);
-            isNextTileWall();
+            console.log('X: ' + pacmanCurrentX);
         }
-        if (isNextTileWall()) {
+        if (isNextTileWall(currentWalkingDirection)) {
             speed = new ƒ.Vector3(0, 0, 0);
         }
-        //console.log(pacman.mtxLocal.translation.get()[0]);
         pacman.mtxLocal.translate(speed);
         viewport.draw();
         ƒ.AudioManager.default.update();
