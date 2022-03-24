@@ -1,33 +1,34 @@
 namespace Script {
   import ƒ = FudgeCore;
   ƒ.Debug.info("Main Program Template running!");
-  document.addEventListener("keydown", controls);
-
+  
   let viewport: ƒ.Viewport;
   let pacman: ƒ.Node;
-  let speed: ƒ.Vector3 = new ƒ.Vector3;
+  let translation: ƒ.Vector3 = new ƒ.Vector3;
+  let speed: number = 1/60;
   document.addEventListener("interactiveViewportStarted", <EventListener>start);
+  document.addEventListener("keydown", controls);
 
   function controls(_event: KeyboardEvent): void {
     switch (_event.code) {
       case ƒ.KEYBOARD_CODE.W:
-        speed = ƒ.Vector3.Y(1/60);
+        translation = ƒ.Vector3.Y(speed);
         console.log("W key pressed.");
         break;
       case ƒ.KEYBOARD_CODE.S:
-        speed = ƒ.Vector3.Y(-1/60);
+        translation = ƒ.Vector3.Y(-speed);
         console.log("S key pressed.");
         break;
       case ƒ.KEYBOARD_CODE.D:
-        speed = ƒ.Vector3.X(1/60);
+        translation = ƒ.Vector3.X(speed);
         console.log("D key pressed.");
         break;
       case ƒ.KEYBOARD_CODE.A:
-        speed = ƒ.Vector3.X(-1/60);
+        translation = ƒ.Vector3.X(-speed);
         console.log("A key pressed.");
         break;
       case ƒ.KEYBOARD_CODE.SPACE:
-        speed = ƒ.Vector3.ZERO();
+        translation = ƒ.Vector3.ZERO();
         console.log("Space key pressed.");
         break;
     }
@@ -46,7 +47,7 @@ namespace Script {
 
   function update(_event: Event): void {
     // ƒ.Physics.simulate();  // if physics is included and used
-    pacman.mtxLocal.translate(speed);
+    pacman.mtxLocal.translate(translation);
     viewport.draw();
     ƒ.AudioManager.default.update();
   }
