@@ -42,7 +42,20 @@ var Script;
     ƒ.Debug.info('Main Program Template running!');
     let viewport;
     let pacman;
+    let grid;
+    let nextRow;
+    let nextRowTile;
     let speed = new ƒ.Vector3(0, 0, 0);
+    let pacmanCurrentX = 1;
+    let pacmanCurrentY = 1;
+    let WalkingDirections;
+    (function (WalkingDirections) {
+        WalkingDirections["Up"] = "UP";
+        WalkingDirections["Down"] = "DOWN";
+        WalkingDirections["Left"] = "LEFT";
+        WalkingDirections["Right"] = "RIGHT";
+    })(WalkingDirections || (WalkingDirections = {}));
+    let currentWalkingDirection = 'NONE';
     document.addEventListener('interactiveViewportStarted', start);
     function start(_event) {
         viewport = _event.detail;
@@ -51,6 +64,50 @@ var Script;
         ƒ.Loop.addEventListener("loopFrame" /* LOOP_FRAME */, update);
         ƒ.Loop.start(); // start the game loop to continously draw the viewport, update the audiosystem and drive the physics i/a
     }
+    function isNextTileWall() {
+        let graph = viewport.getBranch();
+        grid = graph.getChildrenByName('Grid')[0];
+        switch (currentWalkingDirection) {
+            case 'LEFT':
+                nextRow = grid.getChildren()[pacmanCurrentY];
+                nextRowTile = nextRow.getChildren()[pacmanCurrentX - 1];
+                if (nextRowTile.name == 'Wall') {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            case 'RIGHT':
+                nextRow = grid.getChildren()[pacmanCurrentY];
+                nextRowTile = nextRow.getChildren()[pacmanCurrentX + 1];
+                if (nextRowTile.name == 'Wall') {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            case 'UP':
+                nextRow = grid.getChildren()[pacmanCurrentY + 1];
+                nextRowTile = nextRow.getChildren()[pacmanCurrentX];
+                if (nextRowTile.name == 'Wall') {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            case 'DOWN':
+                nextRow = grid.getChildren()[pacmanCurrentY - 1];
+                nextRowTile = nextRow.getChildren()[pacmanCurrentX];
+                if (nextRowTile.name == 'Wall') {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            default:
+                return false;
+        }
+    }
     function update(_event) {
         // ƒ.Physics.simulate();  // if physics is included and used
         if (ƒ.Keyboard.isPressedOne([
@@ -58,6 +115,7 @@ var Script;
             ƒ.KEYBOARD_CODE.D,
         ]) &&
             pacman.mtxLocal.translation.y % 1 < 0.05) {
+            currentWalkingDirection = WalkingDirections.Right;
             speed = new ƒ.Vector3(1 / 60, 0, 0);
         }
         if (ƒ.Keyboard.isPressedOne([
@@ -65,10 +123,12 @@ var Script;
             ƒ.KEYBOARD_CODE.A,
         ]) &&
             pacman.mtxLocal.translation.y % 1 < 0.05) {
+            currentWalkingDirection = WalkingDirections.Left;
             speed = new ƒ.Vector3(-1 / 60, 0, 0);
         }
         if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.ARROW_UP, ƒ.KEYBOARD_CODE.W]) &&
             pacman.mtxLocal.translation.x % 1 < 0.05) {
+            currentWalkingDirection = WalkingDirections.Up;
             speed = new ƒ.Vector3(0, 1 / 60, 0);
         }
         if (ƒ.Keyboard.isPressedOne([
@@ -76,8 +136,33 @@ var Script;
             ƒ.KEYBOARD_CODE.S,
         ]) &&
             pacman.mtxLocal.translation.x % 1 < 0.05) {
+            currentWalkingDirection = WalkingDirections.Down;
             speed = new ƒ.Vector3(0, -1 / 60, 0);
         }
+        if (pacman.mtxLocal.translation.y >= pacmanCurrentY + 0.95) {
+            pacmanCurrentY += 1;
+            console.log(pacmanCurrentY);
+            isNextTileWall();
+        }
+        if (pacman.mtxLocal.translation.y <= pacmanCurrentY - 0.95) {
+            pacmanCurrentY -= 1;
+            console.log(pacmanCurrentY);
+            isNextTileWall();
+        }
+        if (pacman.mtxLocal.translation.x >= pacmanCurrentX + 0.95) {
+            pacmanCurrentX += 1;
+            console.log(pacmanCurrentX);
+            isNextTileWall();
+        }
+        if (pacman.mtxLocal.translation.x <= pacmanCurrentX - 0.95) {
+            pacmanCurrentX -= 1;
+            console.log(pacmanCurrentX);
+            isNextTileWall();
+        }
+        if (isNextTileWall()) {
+            speed = new ƒ.Vector3(0, 0, 0);
+        }
+        //console.log(pacman.mtxLocal.translation.get()[0]);
         pacman.mtxLocal.translate(speed);
         viewport.draw();
         ƒ.AudioManager.default.update();

@@ -86,7 +86,7 @@
                   "children": [
                     {
                       "ƒ.Node": {
-                        "name": "GridTile1",
+                        "name": "Wall",
                         "active": true,
                         "components": {
                           "ComponentMesh": [
@@ -128,7 +128,7 @@
                     },
                     {
                       "ƒ.Node": {
-                        "name": "GridTile2",
+                        "name": "Wall",
                         "active": true,
                         "components": {
                           "ComponentMesh": [
@@ -170,7 +170,7 @@
                     },
                     {
                       "ƒ.Node": {
-                        "name": "GridTile3",
+                        "name": "Wall",
                         "active": true,
                         "components": {
                           "ComponentMesh": [
@@ -212,7 +212,7 @@
                     },
                     {
                       "ƒ.Node": {
-                        "name": "GridTile4",
+                        "name": "Wall",
                         "active": true,
                         "components": {
                           "ComponentMesh": [
@@ -254,7 +254,7 @@
                     },
                     {
                       "ƒ.Node": {
-                        "name": "GridTile5",
+                        "name": "Wall",
                         "active": true,
                         "components": {
                           "ComponentMesh": [
@@ -296,7 +296,7 @@
                     },
                     {
                       "ƒ.Node": {
-                        "name": "GridTile6",
+                        "name": "Wall",
                         "active": true,
                         "components": {
                           "ComponentMesh": [
@@ -362,7 +362,7 @@
                   "children": [
                     {
                       "ƒ.Node": {
-                        "name": "GridTile1",
+                        "name": "Wall",
                         "active": true,
                         "components": {
                           "ComponentMesh": [
@@ -404,7 +404,7 @@
                     },
                     {
                       "ƒ.Node": {
-                        "name": "GridTile2",
+                        "name": "Passable",
                         "active": true,
                         "components": {
                           "ComponentMesh": [
@@ -446,7 +446,7 @@
                     },
                     {
                       "ƒ.Node": {
-                        "name": "GridTile3",
+                        "name": "Passable",
                         "active": true,
                         "components": {
                           "ComponentMesh": [
@@ -488,7 +488,7 @@
                     },
                     {
                       "ƒ.Node": {
-                        "name": "GridTile4",
+                        "name": "Wall",
                         "active": true,
                         "components": {
                           "ComponentMesh": [
@@ -530,7 +530,7 @@
                     },
                     {
                       "ƒ.Node": {
-                        "name": "GridTile5",
+                        "name": "Passable",
                         "active": true,
                         "components": {
                           "ComponentMesh": [
@@ -572,7 +572,7 @@
                     },
                     {
                       "ƒ.Node": {
-                        "name": "GridTile6",
+                        "name": "Wall",
                         "active": true,
                         "components": {
                           "ComponentMesh": [
@@ -638,7 +638,7 @@
                   "children": [
                     {
                       "ƒ.Node": {
-                        "name": "GridTile1",
+                        "name": "Wall",
                         "active": true,
                         "components": {
                           "ComponentMesh": [
@@ -680,7 +680,7 @@
                     },
                     {
                       "ƒ.Node": {
-                        "name": "GridTile2",
+                        "name": "Passable",
                         "active": true,
                         "components": {
                           "ComponentMesh": [
@@ -722,7 +722,7 @@
                     },
                     {
                       "ƒ.Node": {
-                        "name": "GridTile3",
+                        "name": "Passable",
                         "active": true,
                         "components": {
                           "ComponentMesh": [
@@ -764,7 +764,7 @@
                     },
                     {
                       "ƒ.Node": {
-                        "name": "GridTile4",
+                        "name": "Passable",
                         "active": true,
                         "components": {
                           "ComponentMesh": [
@@ -806,7 +806,7 @@
                     },
                     {
                       "ƒ.Node": {
-                        "name": "GridTile5",
+                        "name": "Passable",
                         "active": true,
                         "components": {
                           "ComponentMesh": [
@@ -848,7 +848,7 @@
                     },
                     {
                       "ƒ.Node": {
-                        "name": "GridTile6",
+                        "name": "Wall",
                         "active": true,
                         "components": {
                           "ComponentMesh": [
@@ -914,7 +914,7 @@
                   "children": [
                     {
                       "ƒ.Node": {
-                        "name": "GridTile1",
+                        "name": "Wall",
                         "active": true,
                         "components": {
                           "ComponentMesh": [
@@ -956,7 +956,7 @@
                     },
                     {
                       "ƒ.Node": {
-                        "name": "GridTile2",
+                        "name": "Passable",
                         "active": true,
                         "components": {
                           "ComponentMesh": [
@@ -998,7 +998,7 @@
                     },
                     {
                       "ƒ.Node": {
-                        "name": "GridTile3",
+                        "name": "Wall",
                         "active": true,
                         "components": {
                           "ComponentMesh": [
@@ -1040,7 +1040,7 @@
                     },
                     {
                       "ƒ.Node": {
-                        "name": "GridTile4",
+                        "name": "Passable",
                         "active": true,
                         "components": {
                           "ComponentMesh": [
@@ -1082,7 +1082,7 @@
                     },
                     {
                       "ƒ.Node": {
-                        "name": "GridTile5",
+                        "name": "Passable",
                         "active": true,
                         "components": {
                           "ComponentMesh": [
@@ -1124,7 +1124,7 @@
                     },
                     {
                       "ƒ.Node": {
-                        "name": "GridTile6",
+                        "name": "Wall",
                         "active": true,
                         "components": {
                           "ComponentMesh": [
@@ -1190,7 +1190,7 @@
                   "children": [
                     {
                       "ƒ.Node": {
-                        "name": "GridTile1",
+                        "name": "Wall",
                         "active": true,
                         "components": {
                           "ComponentMesh": [
@@ -1232,7 +1232,7 @@
                     },
                     {
                       "ƒ.Node": {
-                        "name": "GridTile2",
+                        "name": "Passable",
                         "active": true,
                         "components": {
                           "ComponentMesh": [
@@ -1274,7 +1274,7 @@
                     },
                     {
                       "ƒ.Node": {
-                        "name": "GridTile3",
+                        "name": "Wall",
                         "active": true,
                         "components": {
                           "ComponentMesh": [
@@ -1316,7 +1316,7 @@
                     },
                     {
                       "ƒ.Node": {
-                        "name": "GridTile4",
+                        "name": "Wall",
                         "active": true,
                         "components": {
                           "ComponentMesh": [
@@ -1358,7 +1358,7 @@
                     },
                     {
                       "ƒ.Node": {
-                        "name": "GridTile5",
+                        "name": "Passable",
                         "active": true,
                         "components": {
                           "ComponentMesh": [
@@ -1400,7 +1400,7 @@
                     },
                     {
                       "ƒ.Node": {
-                        "name": "GridTile6",
+                        "name": "Wall",
                         "active": true,
                         "components": {
                           "ComponentMesh": [
@@ -1466,7 +1466,7 @@
                   "children": [
                     {
                       "ƒ.Node": {
-                        "name": "GridTile1",
+                        "name": "Wall",
                         "active": true,
                         "components": {
                           "ComponentMesh": [
@@ -1508,7 +1508,7 @@
                     },
                     {
                       "ƒ.Node": {
-                        "name": "GridTile2",
+                        "name": "Wall",
                         "active": true,
                         "components": {
                           "ComponentMesh": [
@@ -1550,7 +1550,7 @@
                     },
                     {
                       "ƒ.Node": {
-                        "name": "GridTile3",
+                        "name": "Wall",
                         "active": true,
                         "components": {
                           "ComponentMesh": [
@@ -1592,7 +1592,7 @@
                     },
                     {
                       "ƒ.Node": {
-                        "name": "GridTile4",
+                        "name": "Wall",
                         "active": true,
                         "components": {
                           "ComponentMesh": [
@@ -1634,7 +1634,7 @@
                     },
                     {
                       "ƒ.Node": {
-                        "name": "GridTile5",
+                        "name": "Wall",
                         "active": true,
                         "components": {
                           "ComponentMesh": [
@@ -1676,7 +1676,7 @@
                     },
                     {
                       "ƒ.Node": {
-                        "name": "GridTile6",
+                        "name": "Wall",
                         "active": true,
                         "components": {
                           "ComponentMesh": [
@@ -1732,7 +1732,7 @@
                   "ƒ.ComponentMesh": {
                     "idMesh": "MeshSphere|2022-03-22T15:30:22.191Z|80271",
                     "pivot": {
-                      "translation": "[1, 1, 0]",
+                      "translation": "[0, 0, 0]",
                       "rotation": "[0, 0, 0]",
                       "scaling": "[0.8999999761581421, 0.8999999761581421, 1]"
                     },
@@ -1764,7 +1764,7 @@
                 {
                   "ƒ.ComponentTransform": {
                     "local": {
-                      "translation": "[0, 0, 0]",
+                      "translation": "[1, 1, 0]",
                       "rotation": "[0, 0, 0]",
                       "scaling": "[1, 1, 1]"
                     },
