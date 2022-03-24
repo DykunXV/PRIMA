@@ -40,17 +40,42 @@ var Script;
 (function (Script) {
     var ƒ = FudgeCore;
     ƒ.Debug.info("Main Program Template running!");
+    document.addEventListener("keydown", controls);
     let viewport;
     let pacman;
-    let speed = new ƒ.Vector3(1 / 60, 1 / 60, 0);
+    let speed = new ƒ.Vector3;
     document.addEventListener("interactiveViewportStarted", start);
+    function controls(_event) {
+        switch (_event.code) {
+            case ƒ.KEYBOARD_CODE.W:
+                speed = ƒ.Vector3.Y(1 / 60);
+                console.log("W key pressed.");
+                break;
+            case ƒ.KEYBOARD_CODE.S:
+                speed = ƒ.Vector3.Y(-1 / 60);
+                console.log("S key pressed.");
+                break;
+            case ƒ.KEYBOARD_CODE.D:
+                speed = ƒ.Vector3.X(1 / 60);
+                console.log("D key pressed.");
+                break;
+            case ƒ.KEYBOARD_CODE.A:
+                speed = ƒ.Vector3.X(-1 / 60);
+                console.log("A key pressed.");
+                break;
+            case ƒ.KEYBOARD_CODE.SPACE:
+                speed = ƒ.Vector3.ZERO();
+                console.log("Space key pressed.");
+                break;
+        }
+    }
     function start(_event) {
         viewport = _event.detail;
         let graph = viewport.getBranch();
         pacman = graph.getChildrenByName("Pacman")[0];
         console.log(pacman);
         ƒ.Loop.addEventListener("loopFrame" /* LOOP_FRAME */, update);
-        // ƒ.Loop.start();  // start the game loop to continously draw the viewport, update the audiosystem and drive the physics i/a
+        ƒ.Loop.start(); // start the game loop to continously draw the viewport, update the audiosystem and drive the physics i/a
     }
     function update(_event) {
         // ƒ.Physics.simulate();  // if physics is included and used
