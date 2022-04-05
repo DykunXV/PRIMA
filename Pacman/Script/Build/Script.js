@@ -39,6 +39,7 @@ var Script;
 var Script;
 (function (Script) {
     var ƒ = FudgeCore;
+    var ƒAid = FudgeAid;
     ƒ.Debug.info("Main Program Template running!");
     let viewport;
     let pacman;
@@ -46,8 +47,23 @@ var Script;
     let direction = ƒ.Vector2.ZERO();
     let speed = 0.05;
     let waka;
+    let root;
+    let spriteNode;
+    let animations;
+    const clrWhite = ƒ.Color.CSS("white");
     document.addEventListener("interactiveViewportStarted", start);
     function start(_event) {
+        // setup sprites
+        loadSprites();
+        // setup scene
+        root = new ƒ.Node("root");
+        spriteNode = new ƒAid.NodeSprite("Sprite");
+        spriteNode.addComponent(new ƒ.ComponentTransform(new ƒ.Matrix4x4()));
+        //spriteNode.setAnimation(<ƒAid.SpriteSheetAnimation>animations["bounce"]);
+        spriteNode.setFrameDirection(1);
+        spriteNode.mtxLocal.translateY(-1);
+        spriteNode.framerate = 6;
+        root.addChild(spriteNode);
         viewport = _event.detail;
         console.log(viewport.camera);
         viewport.camera.mtxPivot.translateZ(10);
@@ -101,6 +117,20 @@ var Script;
     function blocked(_posCheck) {
         let check = grid.getChild(_posCheck.y)?.getChild(_posCheck.x)?.getChild(0);
         return (!check || check.name == "Wall");
+    }
+    async function loadSprites() {
+        let imgSpriteSheet = new ƒ.TextureImage();
+        await imgSpriteSheet.load("Sprites/PacMan.png");
+        let spriteSheet = new ƒ.CoatTextured(clrWhite, imgSpriteSheet);
+        generateSprites(spriteSheet);
+    }
+    function generateSprites(_spritesheet) {
+        animations = {};
+        this.animations = {};
+        let name = "bounce";
+        let sprite = new ƒAid.SpriteSheetAnimation(name, _spritesheet);
+        sprite.generateByGrid(ƒ.Rectangle.GET(1, 0, 17, 60), 3, 32, ƒ.ORIGIN2D.BOTTOMCENTER, ƒ.Vector2.X(20));
+        animations[name] = sprite;
     }
 })(Script || (Script = {}));
 //# sourceMappingURL=Script.js.map
