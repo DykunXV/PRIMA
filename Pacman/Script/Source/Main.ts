@@ -11,30 +11,9 @@ namespace Script {
   let speed: number = 0.05;
   let waka: ƒ.ComponentAudio;
 
-  let root: ƒ.Node;
-  let spriteNode: ƒAid.NodeSprite;
-  let animations: ƒAid.SpriteSheetAnimations;
-  const clrWhite: ƒ.Color = ƒ.Color.CSS("white");
-
   document.addEventListener("interactiveViewportStarted", <EventListener>start);
 
   function start(_event: CustomEvent): void {
-    // setup sprites
-    loadSprites();
-
-    // setup scene
-    root = new ƒ.Node("root");
-
-    spriteNode = new ƒAid.NodeSprite("Sprite");
-    spriteNode.addComponent(new ƒ.ComponentTransform(new ƒ.Matrix4x4()));
-    //spriteNode.setAnimation(<ƒAid.SpriteSheetAnimation>animations["bounce"]);
-    spriteNode.setFrameDirection(1);
-    spriteNode.mtxLocal.translateY(-1);
-    spriteNode.framerate = 6;
-
-    root.addChild(spriteNode);
-
-
     viewport = _event.detail;
 
 
@@ -103,21 +82,5 @@ namespace Script {
   function blocked(_posCheck: ƒ.Vector2): boolean {
     let check: ƒ.Node = grid.getChild(_posCheck.y)?.getChild(_posCheck.x)?.getChild(0);
     return (!check || check.name == "Wall");
-  }
-
-  async function loadSprites(): Promise<void> {
-    let imgSpriteSheet: ƒ.TextureImage = new ƒ.TextureImage();
-    await imgSpriteSheet.load("Sprites/PacMan.png");
-    let spriteSheet: ƒ.CoatTextured = new ƒ.CoatTextured(clrWhite, imgSpriteSheet);
-    generateSprites(spriteSheet);
-  }
-
-  function generateSprites(_spritesheet: ƒ.CoatTextured): void {
-    animations = {};
-    this.animations = {};
-    let name: string = "bounce";
-    let sprite: ƒAid.SpriteSheetAnimation = new ƒAid.SpriteSheetAnimation(name, _spritesheet);
-    sprite.generateByGrid(ƒ.Rectangle.GET(1, 0, 17, 60), 3, 32, ƒ.ORIGIN2D.BOTTOMCENTER, ƒ.Vector2.X(20));
-    animations[name] = sprite;
   }
 }
