@@ -9,7 +9,13 @@ declare namespace Script {
 }
 declare namespace Script {
     import ƒ = FudgeCore;
-    function createGhost(): ƒ.Node;
+    class Ghost extends ƒ.Node {
+        direction: ƒ.Vector2;
+        speed: number;
+        move(): void;
+        static createGhost(): ƒ.Node;
+        static createGhosts(): ƒ.Node;
+    }
 }
 declare namespace Script {
 }

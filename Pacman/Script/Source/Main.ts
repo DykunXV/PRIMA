@@ -10,6 +10,7 @@ namespace Script {
   let direction: ƒ.Vector2 = ƒ.Vector2.ZERO();
   let speed: number = 0.05;
   let waka: ƒ.ComponentAudio;
+
   let ghost: ƒ.Node;
 
   document.addEventListener("interactiveViewportStarted", <EventListener>start);
@@ -29,8 +30,8 @@ namespace Script {
     grid = graph.getChildrenByName("Grid")[0];
     console.log(pacman);
 
-    ghost = createGhost();
-    graph.addChild(ghost);
+    ghost = Ghost.createGhost();
+    graph.addChild(ghost); //add enemies to map
 
     ƒ.AudioManager.default.listenTo(graph);
     waka = graph.getChildrenByName("Sound")[0].getComponents(ƒ.ComponentAudio)[1];

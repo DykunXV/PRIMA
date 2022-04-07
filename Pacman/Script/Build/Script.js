@@ -39,22 +39,35 @@ var Script;
 var Script;
 (function (Script) {
     var ƒ = FudgeCore;
-    function createGhost() {
-        let node = new ƒ.Node('Ghost');
-        let mesh = new ƒ.MeshSphere();
-        let material = new ƒ.Material('MaterialGhost', ƒ.ShaderLit, new ƒ.CoatColored());
-        let cmpTransform = new ƒ.ComponentTransform();
-        let cmpMesh = new ƒ.ComponentMesh(mesh);
-        let cmpMaterial = new ƒ.ComponentMaterial(material);
-        cmpMaterial.clrPrimary = ƒ.Color.CSS('red');
-        node.addComponent(cmpTransform);
-        node.addComponent(cmpMesh);
-        node.addComponent(cmpMaterial);
-        node.mtxLocal.translateX(2);
-        cmpTransform.mtxLocal.translateY(1); //alternative to "node.mtxLocal.translateY(1)"
-        return node;
+    class Ghost extends ƒ.Node {
+        direction = ƒ.Vector2.ZERO();
+        speed = 0.05;
+        move() {
+            //movestuff
+        }
+        static createGhost() {
+            let node = new ƒ.Node('Ghost');
+            let mesh = new ƒ.MeshSphere();
+            let material = new ƒ.Material('MaterialGhost', ƒ.ShaderLit, new ƒ.CoatColored());
+            let cmpTransform = new ƒ.ComponentTransform();
+            let cmpMesh = new ƒ.ComponentMesh(mesh);
+            let cmpMaterial = new ƒ.ComponentMaterial(material);
+            cmpMaterial.clrPrimary = ƒ.Color.CSS('red');
+            node.addComponent(cmpTransform);
+            node.addComponent(cmpMesh);
+            node.addComponent(cmpMaterial);
+            node.mtxLocal.translateX(2);
+            cmpTransform.mtxLocal.translateY(1); //alternative to "node.mtxLocal.translateY(1)"
+            return node;
+        }
+        static createGhosts() {
+            let ghosts = new ƒ.Node('Ghosts');
+            for (let i = 0; i < 3; i++)
+                ghosts.appendChild(new Ghost('Ghost'));
+            return ghosts;
+        }
     }
-    Script.createGhost = createGhost;
+    Script.Ghost = Ghost;
 })(Script || (Script = {}));
 var Script;
 (function (Script) {
@@ -79,8 +92,8 @@ var Script;
         pacman = graph.getChildrenByName("Pacman")[0];
         grid = graph.getChildrenByName("Grid")[0];
         console.log(pacman);
-        ghost = Script.createGhost();
-        graph.addChild(ghost);
+        ghost = Script.Ghost.createGhost();
+        graph.addChild(ghost); //add enemies to map
         ƒ.AudioManager.default.listenTo(graph);
         waka = graph.getChildrenByName("Sound")[0].getComponents(ƒ.ComponentAudio)[1];
         ƒ.Loop.addEventListener("loopFrame" /* LOOP_FRAME */, update);
