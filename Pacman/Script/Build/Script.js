@@ -39,7 +39,26 @@ var Script;
 var Script;
 (function (Script) {
     var ƒ = FudgeCore;
-    var ƒAid = FudgeAid;
+    function createGhost() {
+        let node = new ƒ.Node('Ghost');
+        let mesh = new ƒ.MeshSphere();
+        let material = new ƒ.Material('MaterialGhost', ƒ.ShaderLit, new ƒ.CoatColored());
+        let cmpTransform = new ƒ.ComponentTransform();
+        let cmpMesh = new ƒ.ComponentMesh(mesh);
+        let cmpMaterial = new ƒ.ComponentMaterial(material);
+        cmpMaterial.clrPrimary = ƒ.Color.CSS('red');
+        node.addComponent(cmpTransform);
+        node.addComponent(cmpMesh);
+        node.addComponent(cmpMaterial);
+        node.mtxLocal.translateX(2);
+        cmpTransform.mtxLocal.translateY(1); //alternative to "node.mtxLocal.translateY(1)"
+        return node;
+    }
+    Script.createGhost = createGhost;
+})(Script || (Script = {}));
+var Script;
+(function (Script) {
+    var ƒ = FudgeCore;
     ƒ.Debug.info("Main Program Template running!");
     let viewport;
     let pacman;
@@ -47,23 +66,9 @@ var Script;
     let direction = ƒ.Vector2.ZERO();
     let speed = 0.05;
     let waka;
-    let root;
-    let spriteNode;
-    let animations;
-    const clrWhite = ƒ.Color.CSS("white");
+    let ghost;
     document.addEventListener("interactiveViewportStarted", start);
     function start(_event) {
-        // setup sprites
-        loadSprites();
-        // setup scene
-        root = new ƒ.Node("root");
-        spriteNode = new ƒAid.NodeSprite("Sprite");
-        spriteNode.addComponent(new ƒ.ComponentTransform(new ƒ.Matrix4x4()));
-        //spriteNode.setAnimation(<ƒAid.SpriteSheetAnimation>animations["bounce"]);
-        spriteNode.setFrameDirection(1);
-        spriteNode.mtxLocal.translateY(-1);
-        spriteNode.framerate = 6;
-        root.addChild(spriteNode);
         viewport = _event.detail;
         console.log(viewport.camera);
         viewport.camera.mtxPivot.translateZ(10);
@@ -74,6 +79,8 @@ var Script;
         pacman = graph.getChildrenByName("Pacman")[0];
         grid = graph.getChildrenByName("Grid")[0];
         console.log(pacman);
+        ghost = Script.createGhost();
+        graph.addChild(ghost);
         ƒ.AudioManager.default.listenTo(graph);
         waka = graph.getChildrenByName("Sound")[0].getComponents(ƒ.ComponentAudio)[1];
         ƒ.Loop.addEventListener("loopFrame" /* LOOP_FRAME */, update);
@@ -118,19 +125,39 @@ var Script;
         let check = grid.getChild(_posCheck.y)?.getChild(_posCheck.x)?.getChild(0);
         return (!check || check.name == "Wall");
     }
+})(Script || (Script = {}));
+var Script;
+(function (Script) {
+    var ƒAid = FudgeAid;
+    let animationsPacman;
+    let spritesPacman;
+    const clrWhite = ƒ.Color.CSS('white');
     async function loadSprites() {
         let imgSpriteSheet = new ƒ.TextureImage();
-        await imgSpriteSheet.load("Sprites/PacMan.png");
+        await imgSpriteSheet.load('Images/texture.png');
         let spriteSheet = new ƒ.CoatTextured(clrWhite, imgSpriteSheet);
         generateSprites(spriteSheet);
     }
+    Script.loadSprites = loadSprites;
     function generateSprites(_spritesheet) {
-        animations = {};
+        animationsPacman = {};
         this.animations = {};
-        let name = "bounce";
+        let name = 'move';
         let sprite = new ƒAid.SpriteSheetAnimation(name, _spritesheet);
-        sprite.generateByGrid(ƒ.Rectangle.GET(1, 0, 17, 60), 3, 32, ƒ.ORIGIN2D.BOTTOMCENTER, ƒ.Vector2.X(20));
-        animations[name] = sprite;
+        sprite.generateByGrid(ƒ.Rectangle.GET(0, 0, 64, 64), 8, 64, ƒ.ORIGIN2D.BOTTOMCENTER, ƒ.Vector2.X(64));
+        animationsPacman[name] = sprite;
     }
+    function setSprites(_node) {
+        spritesPacman = new ƒAid.NodeSprite("Sprite");
+        spritesPacman.addComponent(new ƒ.ComponentTransform(new ƒ.Matrix4x4()));
+        spritesPacman.setAnimation(animationsPacman["move"]);
+        spritesPacman.setFrameDirection(1);
+        spritesPacman.mtxLocal.translateZ(0.5);
+        spritesPacman.framerate = 15;
+        _node.addChild(spritesPacman);
+        _node.getComponent(ƒ.ComponentMaterial).clrPrimary = new ƒ.Color(0, 0, 0, 0);
+        spritesPacman.mtxLocal.rotateZ(90);
+    }
+    Script.setSprites = setSprites;
 })(Script || (Script = {}));
 //# sourceMappingURL=Script.js.map

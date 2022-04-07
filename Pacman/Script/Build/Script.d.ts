@@ -8,4 +8,12 @@ declare namespace Script {
     }
 }
 declare namespace Script {
+    import ƒ = FudgeCore;
+    function createGhost(): ƒ.Node;
+}
+declare namespace Script {
+}
+declare namespace Script {
+    function loadSprites(): Promise<void>;
+    function setSprites(_node: ƒ.Node): void;
 }
