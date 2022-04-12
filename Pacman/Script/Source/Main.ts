@@ -50,54 +50,22 @@ namespace Script {
       let directionOld: ƒ.Vector2 = direction.clone;
       if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.ARROW_RIGHT, ƒ.KEYBOARD_CODE.D])) {
         direction.set(1, 0);
-        if (directionOldString == 'right') {
-          spriteNode.mtxLocal.rotateZ(0);
-        } else if (directionOldString == 'left') {
-          spriteNode.mtxLocal.rotateZ(180);
-        } else if (directionOldString == 'up') {
-          spriteNode.mtxLocal.rotateZ(-90);
-        } else if (directionOldString == 'down') {
-          spriteNode.mtxLocal.rotateZ(90);
-        }
+        rotateSprite(ƒ.KEYBOARD_CODE.ARROW_RIGHT, directionOldString);
         directionOldString = 'right'
       }
       if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.ARROW_LEFT, ƒ.KEYBOARD_CODE.A])){
         direction.set(-1, 0);
-        if (directionOldString == 'right') {
-          spriteNode.mtxLocal.rotateZ(180);
-        } else if (directionOldString == 'left') {
-          spriteNode.mtxLocal.rotateZ(0);
-        } else if (directionOldString == 'up') {
-          spriteNode.mtxLocal.rotateZ(90);
-        } else if (directionOldString == 'down') {
-          spriteNode.mtxLocal.rotateZ(-90);
-        }
+        rotateSprite(ƒ.KEYBOARD_CODE.ARROW_LEFT, directionOldString);
         directionOldString = 'left'
       }
       if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.ARROW_UP, ƒ.KEYBOARD_CODE.W])){
         direction.set(0, 1);
-        if (directionOldString == 'right') {
-          spriteNode.mtxLocal.rotateZ(90);
-        } else if (directionOldString == 'left') {
-          spriteNode.mtxLocal.rotateZ(-90);
-        } else if (directionOldString == 'up') {
-          spriteNode.mtxLocal.rotateZ(0);
-        } else if (directionOldString == 'down') {
-          spriteNode.mtxLocal.rotateZ(180);
-        }
+        rotateSprite(ƒ.KEYBOARD_CODE.ARROW_UP, directionOldString);
         directionOldString = 'up'
       }
       if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.ARROW_DOWN, ƒ.KEYBOARD_CODE.S])){
         direction.set(0, -1);
-        if (directionOldString == 'right') {
-          spriteNode.mtxLocal.rotateZ(-90);
-        } else if (directionOldString == 'left') {
-          spriteNode.mtxLocal.rotateZ(90);
-        } else if (directionOldString == 'up') {
-          spriteNode.mtxLocal.rotateZ(180);
-        } else if (directionOldString == 'down') {
-          spriteNode.mtxLocal.rotateZ(0);
-        }
+        rotateSprite(ƒ.KEYBOARD_CODE.ARROW_DOWN, directionOldString);
         directionOldString = 'down'
       }
         

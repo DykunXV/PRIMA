@@ -28,4 +28,5 @@ declare namespace Script {
     function initSprites(_node: ƒ.Node): Promise<void>;
     function loadSprites(): Promise<void>;
     function generateSprites(_spritesheet: ƒ.CoatTextured): void;
+    function rotateSprite(_direction: ƒ.KEYBOARD_CODE, _directionOld: string): void;
 }

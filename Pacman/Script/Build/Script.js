@@ -110,66 +110,22 @@ var Script;
             let directionOld = Script.direction.clone;
             if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.ARROW_RIGHT, ƒ.KEYBOARD_CODE.D])) {
                 Script.direction.set(1, 0);
-                if (directionOldString == 'right') {
-                    Script.spriteNode.mtxLocal.rotateZ(0);
-                }
-                else if (directionOldString == 'left') {
-                    Script.spriteNode.mtxLocal.rotateZ(180);
-                }
-                else if (directionOldString == 'up') {
-                    Script.spriteNode.mtxLocal.rotateZ(-90);
-                }
-                else if (directionOldString == 'down') {
-                    Script.spriteNode.mtxLocal.rotateZ(90);
-                }
+                Script.rotateSprite(ƒ.KEYBOARD_CODE.ARROW_RIGHT, directionOldString);
                 directionOldString = 'right';
             }
             if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.ARROW_LEFT, ƒ.KEYBOARD_CODE.A])) {
                 Script.direction.set(-1, 0);
-                if (directionOldString == 'right') {
-                    Script.spriteNode.mtxLocal.rotateZ(180);
-                }
-                else if (directionOldString == 'left') {
-                    Script.spriteNode.mtxLocal.rotateZ(0);
-                }
-                else if (directionOldString == 'up') {
-                    Script.spriteNode.mtxLocal.rotateZ(90);
-                }
-                else if (directionOldString == 'down') {
-                    Script.spriteNode.mtxLocal.rotateZ(-90);
-                }
+                Script.rotateSprite(ƒ.KEYBOARD_CODE.ARROW_LEFT, directionOldString);
                 directionOldString = 'left';
             }
             if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.ARROW_UP, ƒ.KEYBOARD_CODE.W])) {
                 Script.direction.set(0, 1);
-                if (directionOldString == 'right') {
-                    Script.spriteNode.mtxLocal.rotateZ(90);
-                }
-                else if (directionOldString == 'left') {
-                    Script.spriteNode.mtxLocal.rotateZ(-90);
-                }
-                else if (directionOldString == 'up') {
-                    Script.spriteNode.mtxLocal.rotateZ(0);
-                }
-                else if (directionOldString == 'down') {
-                    Script.spriteNode.mtxLocal.rotateZ(180);
-                }
+                Script.rotateSprite(ƒ.KEYBOARD_CODE.ARROW_UP, directionOldString);
                 directionOldString = 'up';
             }
             if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.ARROW_DOWN, ƒ.KEYBOARD_CODE.S])) {
                 Script.direction.set(0, -1);
-                if (directionOldString == 'right') {
-                    Script.spriteNode.mtxLocal.rotateZ(-90);
-                }
-                else if (directionOldString == 'left') {
-                    Script.spriteNode.mtxLocal.rotateZ(90);
-                }
-                else if (directionOldString == 'up') {
-                    Script.spriteNode.mtxLocal.rotateZ(180);
-                }
-                else if (directionOldString == 'down') {
-                    Script.spriteNode.mtxLocal.rotateZ(0);
-                }
+                Script.rotateSprite(ƒ.KEYBOARD_CODE.ARROW_DOWN, directionOldString);
                 directionOldString = 'down';
             }
             if (blocked(ƒ.Vector2.SUM(nearestGridPoint, Script.direction)))
@@ -229,5 +185,28 @@ var Script;
         spriteAnimations[name] = sprite;
     }
     Script.generateSprites = generateSprites;
+    function rotateSprite(_direction, _directionOld) {
+        if (_direction !== _directionOld) {
+            if ((_direction === ƒ.KEYBOARD_CODE.ARROW_RIGHT && _directionOld === 'down') ||
+                (_direction === ƒ.KEYBOARD_CODE.ARROW_UP && _directionOld === 'right') ||
+                (_direction === ƒ.KEYBOARD_CODE.ARROW_DOWN && _directionOld === 'left') ||
+                (_direction === ƒ.KEYBOARD_CODE.ARROW_LEFT && _directionOld === 'up')) {
+                Script.spriteNode.mtxLocal.rotateZ(90);
+            }
+            else if ((_direction === ƒ.KEYBOARD_CODE.ARROW_RIGHT && _directionOld === 'ip') ||
+                (_direction === ƒ.KEYBOARD_CODE.ARROW_UP && _directionOld === 'left') ||
+                (_direction === ƒ.KEYBOARD_CODE.ARROW_DOWN && _directionOld === 'right') ||
+                (_direction === ƒ.KEYBOARD_CODE.ARROW_LEFT && _directionOld === 'down')) {
+                Script.spriteNode.mtxLocal.rotateZ(-90);
+            }
+            else if ((_direction === ƒ.KEYBOARD_CODE.ARROW_RIGHT && _directionOld === 'left') ||
+                (_direction === ƒ.KEYBOARD_CODE.ARROW_UP && _directionOld === 'down') ||
+                (_direction === ƒ.KEYBOARD_CODE.ARROW_DOWN && _directionOld === 'up') ||
+                (_direction === ƒ.KEYBOARD_CODE.ARROW_LEFT && _directionOld === 'down')) {
+                Script.spriteNode.mtxLocal.rotateZ(180);
+            }
+        }
+    }
+    Script.rotateSprite = rotateSprite;
 })(Script || (Script = {}));
 //# sourceMappingURL=Script.js.map
