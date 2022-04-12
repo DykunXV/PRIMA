@@ -53,7 +53,7 @@ namespace Script {
   }
 
   export function rotateSprite(_direction: ƒ.KEYBOARD_CODE, _directionOld: string): void {
-    if (_direction !== _directionOld) {
+    
       if (
         (_direction === ƒ.KEYBOARD_CODE.ARROW_RIGHT && _directionOld === 'down') ||
         (_direction === ƒ.KEYBOARD_CODE.ARROW_UP && _directionOld === 'right') ||
@@ -62,7 +62,7 @@ namespace Script {
       ) {
         spriteNode.mtxLocal.rotateZ(90);
       } else if (
-        (_direction === ƒ.KEYBOARD_CODE.ARROW_RIGHT && _directionOld === 'ip') ||
+        (_direction === ƒ.KEYBOARD_CODE.ARROW_RIGHT && _directionOld === 'up') ||
         (_direction === ƒ.KEYBOARD_CODE.ARROW_UP && _directionOld === 'left') ||
         (_direction === ƒ.KEYBOARD_CODE.ARROW_DOWN && _directionOld === 'right') ||
         (_direction === ƒ.KEYBOARD_CODE.ARROW_LEFT && _directionOld === 'down')
@@ -72,10 +72,10 @@ namespace Script {
         (_direction === ƒ.KEYBOARD_CODE.ARROW_RIGHT && _directionOld === 'left') ||
         (_direction === ƒ.KEYBOARD_CODE.ARROW_UP && _directionOld === 'down') ||
         (_direction === ƒ.KEYBOARD_CODE.ARROW_DOWN && _directionOld === 'up') ||
-        (_direction === ƒ.KEYBOARD_CODE.ARROW_LEFT && _directionOld === 'down')
+        (_direction === ƒ.KEYBOARD_CODE.ARROW_LEFT && _directionOld === 'right')
       ) {
         spriteNode.mtxLocal.rotateZ(180);
       }
-    }
+    
   }
 }
