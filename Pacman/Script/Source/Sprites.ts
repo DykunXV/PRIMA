@@ -1,49 +1,56 @@
 namespace Script {
+  import ƒ = FudgeCore;
   import ƒAid = FudgeAid;
 
-  let animationsPacman: ƒAid.SpriteSheetAnimations;
-  let spritesPacman: ƒAid.NodeSprite;
-  const clrWhite: ƒ.Color = ƒ.Color.CSS('white');
+  let spriteAnimations: ƒAid.SpriteSheetAnimations;
+  export let spriteNode: ƒAid.NodeSprite;
+
+  export async function initSprites(_node: ƒ.Node): Promise<void> {
+    await loadSprites();
+    spriteNode = new ƒAid.NodeSprite('Sprite');
+    spriteNode.addComponent(new ƒ.ComponentTransform(new ƒ.Matrix4x4()));
+    spriteNode.setAnimation(
+      <ƒAid.SpriteSheetAnimation>spriteAnimations['Pacman']
+    );
+    spriteNode.setFrameDirection(1);
+    spriteNode.mtxLocal.translateY(0);
+    spriteNode.framerate = 15;
+
+    _node.addChild(spriteNode);
+    _node.getComponent(ƒ.ComponentMaterial).clrPrimary = new ƒ.Color(
+      0,
+      0,
+      0,
+      0
+    );
+  }
 
   export async function loadSprites(): Promise<void> {
     let imgSpriteSheet: ƒ.TextureImage = new ƒ.TextureImage();
     await imgSpriteSheet.load('Images/texture.png');
-
     let spriteSheet: ƒ.CoatTextured = new ƒ.CoatTextured(
-      clrWhite,
+      new ƒ.Color(),
       imgSpriteSheet
     );
     generateSprites(spriteSheet);
   }
 
-  function generateSprites(_spritesheet: ƒ.CoatTextured): void {
-    animationsPacman = {};
-    this.animations = {};
-    let name: string = 'move';
+  export function generateSprites(_spritesheet: ƒ.CoatTextured): void {
+    spriteAnimations = {};
+    let name: string = 'Pacman';
     let sprite: ƒAid.SpriteSheetAnimation = new ƒAid.SpriteSheetAnimation(
       name,
       _spritesheet
     );
     sprite.generateByGrid(
       ƒ.Rectangle.GET(0, 0, 64, 64),
-      8,
-      64,
-      ƒ.ORIGIN2D.BOTTOMCENTER,
+      6,
+      70,
+      ƒ.ORIGIN2D.CENTER,
       ƒ.Vector2.X(64)
     );
-    animationsPacman[name] = sprite;
+    spriteAnimations[name] = sprite;
   }
 
-  export function setSprites(_node: ƒ.Node): void {
-    spritesPacman = new ƒAid.NodeSprite("Sprite");
-    spritesPacman.addComponent(new ƒ.ComponentTransform(new ƒ.Matrix4x4()));
-    spritesPacman.setAnimation(<ƒAid.SpriteSheetAnimation>animationsPacman["move"]);
-    spritesPacman.setFrameDirection(1);
-    spritesPacman.mtxLocal.translateZ(0.5);
-    spritesPacman.framerate = 15;
-
-    _node.addChild(spritesPacman);
-    _node.getComponent(ƒ.ComponentMaterial).clrPrimary = new ƒ.Color(0, 0, 0, 0);
-    spritesPacman.mtxLocal.rotateZ(90);
-  }
+  
 }

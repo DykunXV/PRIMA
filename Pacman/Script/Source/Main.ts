@@ -4,40 +4,40 @@ namespace Script {
   
   ƒ.Debug.info("Main Program Template running!");
 
+  let graph: ƒ.Node;
   let viewport: ƒ.Viewport;
   let pacman: ƒ.Node;
   let grid: ƒ.Node;
-  let direction: ƒ.Vector2 = ƒ.Vector2.ZERO();
+  export let direction: ƒ.Vector2 = ƒ.Vector2.ZERO();
+  let directionOldString: string = 'right';
   let speed: number = 0.05;
+  let startSound: ƒ.ComponentAudio;
   let waka: ƒ.ComponentAudio;
 
   let ghost: ƒ.Node;
 
-  document.addEventListener("interactiveViewportStarted", <EventListener>start);
+  document.addEventListener("interactiveViewportStarted", <any>start);
 
-  function start(_event: CustomEvent): void {
+  async function start(_event: CustomEvent): Promise<void> {
     viewport = _event.detail;
-
-    console.log(viewport.camera);
     viewport.camera.mtxPivot.translateZ(10);
     viewport.camera.mtxPivot.rotateY(180);
-    viewport.camera.mtxPivot.translateX(-2);
-    viewport.camera.mtxPivot.translateY(2);
 
-
-    let graph: ƒ.Node = viewport.getBranch();
+    graph = viewport.getBranch();
     pacman = graph.getChildrenByName("Pacman")[0];
+    await initSprites(pacman);
     grid = graph.getChildrenByName("Grid")[0];
-    console.log(pacman);
 
     ghost = Ghost.createGhost();
-    graph.addChild(ghost); //add enemies to map
+    graph.addChild(ghost);
 
     ƒ.AudioManager.default.listenTo(graph);
+    startSound = graph.getChildrenByName("Sound")[0].getComponents(ƒ.ComponentAudio)[0];
+    startSound.play(true);
     waka = graph.getChildrenByName("Sound")[0].getComponents(ƒ.ComponentAudio)[1];
 
     ƒ.Loop.addEventListener(ƒ.EVENT.LOOP_FRAME, update);
-    ƒ.Loop.start();  // start the game loop to continously draw the viewport, update the audiosystem and drive the physics i/a
+    ƒ.Loop.start();
   }
 
   function update(_event: Event): void {
@@ -48,14 +48,59 @@ namespace Script {
 
     if (nearGridPoint) {
       let directionOld: ƒ.Vector2 = direction.clone;
-      if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.ARROW_RIGHT, ƒ.KEYBOARD_CODE.D]))
+      if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.ARROW_RIGHT, ƒ.KEYBOARD_CODE.D])) {
         direction.set(1, 0);
-      if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.ARROW_LEFT, ƒ.KEYBOARD_CODE.A]))
+        if (directionOldString == 'right') {
+          spriteNode.mtxLocal.rotateZ(0);
+        } else if (directionOldString == 'left') {
+          spriteNode.mtxLocal.rotateZ(180);
+        } else if (directionOldString == 'up') {
+          spriteNode.mtxLocal.rotateZ(-90);
+        } else if (directionOldString == 'down') {
+          spriteNode.mtxLocal.rotateZ(90);
+        }
+        directionOldString = 'right'
+      }
+      if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.ARROW_LEFT, ƒ.KEYBOARD_CODE.A])){
         direction.set(-1, 0);
-      if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.ARROW_UP, ƒ.KEYBOARD_CODE.W]))
+        if (directionOldString == 'right') {
+          spriteNode.mtxLocal.rotateZ(180);
+        } else if (directionOldString == 'left') {
+          spriteNode.mtxLocal.rotateZ(0);
+        } else if (directionOldString == 'up') {
+          spriteNode.mtxLocal.rotateZ(90);
+        } else if (directionOldString == 'down') {
+          spriteNode.mtxLocal.rotateZ(-90);
+        }
+        directionOldString = 'left'
+      }
+      if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.ARROW_UP, ƒ.KEYBOARD_CODE.W])){
         direction.set(0, 1);
-      if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.ARROW_DOWN, ƒ.KEYBOARD_CODE.S]))
+        if (directionOldString == 'right') {
+          spriteNode.mtxLocal.rotateZ(90);
+        } else if (directionOldString == 'left') {
+          spriteNode.mtxLocal.rotateZ(-90);
+        } else if (directionOldString == 'up') {
+          spriteNode.mtxLocal.rotateZ(0);
+        } else if (directionOldString == 'down') {
+          spriteNode.mtxLocal.rotateZ(180);
+        }
+        directionOldString = 'up'
+      }
+      if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.ARROW_DOWN, ƒ.KEYBOARD_CODE.S])){
         direction.set(0, -1);
+        if (directionOldString == 'right') {
+          spriteNode.mtxLocal.rotateZ(-90);
+        } else if (directionOldString == 'left') {
+          spriteNode.mtxLocal.rotateZ(90);
+        } else if (directionOldString == 'up') {
+          spriteNode.mtxLocal.rotateZ(180);
+        } else if (directionOldString == 'down') {
+          spriteNode.mtxLocal.rotateZ(0);
+        }
+        directionOldString = 'down'
+      }
+        
 
 
       if (blocked(ƒ.Vector2.SUM(nearestGridPoint, direction)))

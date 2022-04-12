@@ -18,8 +18,14 @@ declare namespace Script {
     }
 }
 declare namespace Script {
+    import ƒ = FudgeCore;
+    let direction: ƒ.Vector2;
 }
 declare namespace Script {
+    import ƒ = FudgeCore;
+    import ƒAid = FudgeAid;
+    let spriteNode: ƒAid.NodeSprite;
+    function initSprites(_node: ƒ.Node): Promise<void>;
     function loadSprites(): Promise<void>;
-    function setSprites(_node: ƒ.Node): void;
+    function generateSprites(_spritesheet: ƒ.CoatTextured): void;
 }
