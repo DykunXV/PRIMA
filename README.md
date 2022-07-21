@@ -8,7 +8,7 @@
   - Docent: Prof. Jirka Dell'Oro-Friedl
   * Link to the finished and executable application on Github-Pages: https://dykunxv.github.io/PRIMA/3DBowling/
   * Link to the source code: https://github.com/DykunXV/PRIMA/tree/main/3DBowling
-  * Link to the design document: https://dykunxv.github.io/PRIMA/3DBowling/Design/3DBowling_Design_Document.pdf
+  * Link to the design document: https://github.com/DykunXV/PRIMA/tree/main/3DBowling/Design/3DBowling_Design_Document.pdf
   * Description for users on how to interact: Bevor der Ball geworfen werden kann muss die Kraft und der Winkel bestimmt werden. Das Spiel schwankt hier, nacheinander, zwischen verschiedenen Werten und der Spieler muss, durch drücken der Leertaste, beim gewünschten Wert anhalten. Sobald dies getan ist, kann der Ball mit dem "R"-Taste geworfen werden. Ganz zu Anfang, bevor Kraft und Winkel bestimmt sind, ist es ebenfalls möglich, mit der "A"-Taste und der "D"-Taste, die horizontale Position des Balls zu verändern.
   * Description on how to install, if applicable (additional services, database etc.): Trifft nicht zu.
   * A copy of the catalogue of criteria above, the right column replaced with very brief explanations and descriptions of the fullfullments of these criteria: Siehe folgende Tabelle.
