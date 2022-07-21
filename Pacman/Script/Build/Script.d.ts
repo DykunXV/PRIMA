@@ -18,8 +18,6 @@ declare namespace Script {
     }
 }
 declare namespace Script {
-    import ƒ = FudgeCore;
-    let direction: ƒ.Vector2;
 }
 declare namespace Script {
     import ƒ = FudgeCore;

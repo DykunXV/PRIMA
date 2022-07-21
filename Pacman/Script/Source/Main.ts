@@ -8,7 +8,7 @@ namespace Script {
   let viewport: ƒ.Viewport;
   let pacman: ƒ.Node;
   let grid: ƒ.Node;
-  export let direction: ƒ.Vector2 = ƒ.Vector2.ZERO();
+  let direction: ƒ.Vector2 = ƒ.Vector2.ZERO();
   let directionOldString: string = 'right';
   let speed: number = 0.05;
   let startSound: ƒ.ComponentAudio;

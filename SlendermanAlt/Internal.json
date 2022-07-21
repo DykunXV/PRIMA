@@ -1,0 +1,237 @@
+{
+  "MeshQuad|2022-04-14T13:01:56.237Z|30600": {
+    "ƒ.MeshQuad": {
+      "idResource": "MeshQuad|2022-04-14T13:01:56.237Z|30600",
+      "name": "GrassPlane"
+    }
+  },
+  "Material|2022-04-14T13:01:58.952Z|38366": {
+    "ƒ.Material": {
+      "name": "GrassLitTextured",
+      "idResource": "Material|2022-04-14T13:01:58.952Z|38366",
+      "shader": "ShaderLitTextured",
+      "coat": {
+        "ƒ.CoatTextured": {
+          "color": "[1, 1, 1, 1]",
+          "idTexture": "TextureImage|2022-04-14T13:10:54.755Z|84924"
+        }
+      }
+    }
+  },
+  "Graph|2022-04-14T13:02:32.231Z|19619": {
+    "ƒ.Graph": {
+      "name": "Scene",
+      "active": true,
+      "components": {
+        "ComponentLight": []
+      },
+      "children": [
+        {
+          "ƒ.Node": {
+            "name": "Environment",
+            "active": true,
+            "components": {},
+            "children": [
+              {
+                "ƒ.Node": {
+                  "name": "Ground",
+                  "active": true,
+                  "components": {
+                    "ComponentMesh": [
+                      {
+                        "ƒ.ComponentMesh": {
+                          "idMesh": "MeshQuad|2022-04-14T13:01:56.237Z|30600",
+                          "pivot": {
+                            "translation": "[0, 0, 0]",
+                            "rotation": "[-90, 0, 0]",
+                            "scaling": "[50, 50, 1]"
+                          },
+                          "Component": {
+                            "active": true
+                          }
+                        }
+                      }
+                    ],
+                    "ComponentMaterial": [
+                      {
+                        "ƒ.ComponentMaterial": {
+                          "sortForAlpha": false,
+                          "clrPrimary": "[1, 1, 1, 1]",
+                          "clrSecondary": "[1, 1, 1, 1]",
+                          "pivot": {
+                            "translation": "[0, 0]",
+                            "rotation": 0,
+                            "scaling": "[1, 1]"
+                          },
+                          "Component": {
+                            "active": true
+                          },
+                          "idMaterial": "Material|2022-04-14T13:12:45.143Z|32199"
+                        }
+                      }
+                    ]
+                  },
+                  "children": []
+                }
+              },
+              {
+                "ƒ.Node": {
+                  "name": "Notes",
+                  "active": true,
+                  "components": {},
+                  "children": []
+                }
+              },
+              {
+                "ƒ.Node": {
+                  "name": "Houses",
+                  "active": true,
+                  "components": {},
+                  "children": []
+                }
+              },
+              {
+                "ƒ.Node": {
+                  "name": "Light",
+                  "active": true,
+                  "components": {
+                    "ComponentLight": [
+                      {
+                        "ƒ.ComponentLight": {
+                          "pivot": {
+                            "translation": "[0, 0, 0]",
+                            "rotation": "[0, 0, 0]",
+                            "scaling": "[1, 1, 1]"
+                          },
+                          "light": {
+                            "ƒ.LightAmbient": {
+                              "color": "[1, 1, 1, 1]"
+                            }
+                          },
+                          "Component": {
+                            "active": true
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "children": []
+                }
+              },
+              {
+                "ƒ.Node": {
+                  "name": "Trees",
+                  "active": true,
+                  "components": {},
+                  "children": []
+                }
+              }
+            ]
+          }
+        },
+        {
+          "ƒ.Node": {
+            "name": "Entities",
+            "active": true,
+            "components": {},
+            "children": [
+              {
+                "ƒ.Node": {
+                  "name": "Slenderman",
+                  "active": true,
+                  "components": {},
+                  "children": []
+                }
+              },
+              {
+                "ƒ.Node": {
+                  "name": "Player",
+                  "active": true,
+                  "components": {},
+                  "children": [
+                    {
+                      "ƒ.Node": {
+                        "name": "Camera",
+                        "active": true,
+                        "components": {
+                          "ComponentCamera": [
+                            {
+                              "ƒ.ComponentCamera": {
+                                "backgroundColor": {
+                                  "r": 0,
+                                  "g": 0,
+                                  "b": 0,
+                                  "a": 1
+                                },
+                                "backgroundEnabled": true,
+                                "projection": "central",
+                                "fieldOfView": 45,
+                                "direction": 2,
+                                "aspect": 1,
+                                "pivot": {
+                                  "translation": "[0, 0, 0]",
+                                  "rotation": "[0, 0, 0]",
+                                  "scaling": "[1, 1, 1]"
+                                },
+                                "Component": {
+                                  "active": true
+                                }
+                              }
+                            }
+                          ],
+                          "ComponentTransform": [
+                            {
+                              "ƒ.ComponentTransform": {
+                                "local": {
+                                  "translation": "[0, 1.6999999284744263, 0]",
+                                  "rotation": "[0, 0, 0]",
+                                  "scaling": "[1, 1, 1]"
+                                },
+                                "Component": {
+                                  "active": true
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        "children": []
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "idResource": "Graph|2022-04-14T13:02:32.231Z|19619",
+      "type": "Graph"
+    }
+  },
+  "TextureImage|2022-04-14T13:10:54.755Z|84924": {
+    "ƒ.TextureImage": {
+      "url": "Assets\\Textures\\GrassTexture.jpg",
+      "type": "TextureImage",
+      "Texture": {
+        "idResource": "TextureImage|2022-04-14T13:10:54.755Z|84924",
+        "name": "Assets\\Textures\\GrassTexture.jpg",
+        "mipmap": "CRISP"
+      }
+    }
+  },
+  "Material|2022-04-14T13:12:45.143Z|32199": {
+    "ƒ.Material": {
+      "name": "GrassGouraudTextured",
+      "idResource": "Material|2022-04-14T13:12:45.143Z|32199",
+      "shader": "ShaderGouraudTextured",
+      "coat": {
+        "ƒ.CoatRemissiveTextured": {
+          "color": "[1, 1, 1, 1]",
+          "idTexture": "TextureImage|2022-04-14T13:10:54.755Z|84924",
+          "diffuse": 1,
+          "specular": 0
+        }
+      }
+    }
+  }
+}

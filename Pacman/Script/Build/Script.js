@@ -77,7 +77,7 @@ var Script;
     let viewport;
     let pacman;
     let grid;
-    Script.direction = ƒ.Vector2.ZERO();
+    let direction = ƒ.Vector2.ZERO();
     let directionOldString = 'right';
     let speed = 0.05;
     let startSound;
@@ -107,44 +107,44 @@ var Script;
         let nearestGridPoint = new ƒ.Vector2(Math.round(posPacman.x), Math.round(posPacman.y));
         let nearGridPoint = posPacman.toVector2().equals(nearestGridPoint, 2 * speed);
         if (nearGridPoint) {
-            let directionOld = Script.direction.clone;
+            let directionOld = direction.clone;
             if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.ARROW_RIGHT, ƒ.KEYBOARD_CODE.D])) {
-                Script.direction.set(1, 0);
+                direction.set(1, 0);
                 Script.rotateSprite(ƒ.KEYBOARD_CODE.ARROW_RIGHT, directionOldString);
                 directionOldString = 'right';
             }
             if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.ARROW_LEFT, ƒ.KEYBOARD_CODE.A])) {
-                Script.direction.set(-1, 0);
+                direction.set(-1, 0);
                 Script.rotateSprite(ƒ.KEYBOARD_CODE.ARROW_LEFT, directionOldString);
                 directionOldString = 'left';
             }
             if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.ARROW_UP, ƒ.KEYBOARD_CODE.W])) {
-                Script.direction.set(0, 1);
+                direction.set(0, 1);
                 Script.rotateSprite(ƒ.KEYBOARD_CODE.ARROW_UP, directionOldString);
                 directionOldString = 'up';
             }
             if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.ARROW_DOWN, ƒ.KEYBOARD_CODE.S])) {
-                Script.direction.set(0, -1);
+                direction.set(0, -1);
                 Script.rotateSprite(ƒ.KEYBOARD_CODE.ARROW_DOWN, directionOldString);
                 directionOldString = 'down';
             }
-            if (blocked(ƒ.Vector2.SUM(nearestGridPoint, Script.direction)))
-                if (Script.direction.equals(directionOld)) // did not turn
-                    Script.direction.set(0, 0); // full stop
+            if (blocked(ƒ.Vector2.SUM(nearestGridPoint, direction)))
+                if (direction.equals(directionOld)) // did not turn
+                    direction.set(0, 0); // full stop
                 else {
                     if (blocked(ƒ.Vector2.SUM(nearestGridPoint, directionOld))) // wrong turn and dead end
-                        Script.direction.set(0, 0); // full stop
+                        direction.set(0, 0); // full stop
                     else
-                        Script.direction = directionOld; // don't turn but continue ahead
+                        direction = directionOld; // don't turn but continue ahead
                 }
-            if (!Script.direction.equals(directionOld) || Script.direction.equals(ƒ.Vector2.ZERO()))
+            if (!direction.equals(directionOld) || direction.equals(ƒ.Vector2.ZERO()))
                 pacman.mtxLocal.translation = nearestGridPoint.toVector3();
-            if (Script.direction.equals(ƒ.Vector2.ZERO()))
+            if (direction.equals(ƒ.Vector2.ZERO()))
                 waka.play(false);
             else if (!waka.isPlaying)
                 waka.play(true);
         }
-        pacman.mtxLocal.translate(ƒ.Vector2.SCALE(Script.direction, speed).toVector3());
+        pacman.mtxLocal.translate(ƒ.Vector2.SCALE(direction, speed).toVector3());
         viewport.draw();
         // ƒ.AudioManager.default.update();
     }
